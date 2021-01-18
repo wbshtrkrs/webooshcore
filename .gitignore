@@ -1,0 +1,14 @@
+/vendor
+/node_modules
+/public/storage
+/public/assets/upload/*
+Homestead.yaml
+Homestead.json
+/backup
+/storage/logs/
+/tests/
+.idea/
+composer.lock
+
+
+
