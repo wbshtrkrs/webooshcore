@@ -1,6 +1,6 @@
 <?php
 
-namespace Weboosh\WebooshCore\app\Service;
+namespace weboosh\webooshcore\app\Service;
 
 use Spatie\Sitemap\SitemapGenerator;
 

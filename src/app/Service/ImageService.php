@@ -7,7 +7,7 @@ use Intervention\Image\ImageManager;
 use PhpParser\Node\Scalar\String_;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use ErrorException;
-use Weboosh\WebooshCore\app\Util\WebooshShortPixel;
+use weboosh\webooshcore\app\Util\WebooshShortPixel;
 
 
 class ImageService

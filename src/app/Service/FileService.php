@@ -4,7 +4,7 @@ namespace App\Service\WebooshCore;
 
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManager;
-use Weboosh\WebooshCore\app\Util\WebooshShortPixel;
+use weboosh\webooshcore\app\Util\WebooshShortPixel;
 
 
 class FileService{

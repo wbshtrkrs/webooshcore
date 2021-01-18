@@ -1,6 +1,6 @@
 <?php
 
-namespace Weboosh\Webooshcore;
+namespace weboosh\webooshcore;
 
 use App\Blade\CustomBlade;
 use Illuminate\Support\ServiceProvider;

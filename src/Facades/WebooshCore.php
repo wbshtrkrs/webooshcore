@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Weboosh\WebooshCore\Facades;
+namespace weboosh\webooshcore\Facades;
 
 use App\Service\WebooshCore\ComponentService;
 use Illuminate\Support\Facades\Facade;

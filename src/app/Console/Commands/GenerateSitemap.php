@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Weboosh\WebooshCore\app\Service\SitemapService;
+use weboosh\webooshcore\app\Service\SitemapService;
 
 class GenerateSitemap extends Command
 {
