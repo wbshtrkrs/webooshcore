@@ -9,8 +9,23 @@
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
         </button>
-        {{--<ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
+        <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
             <li class="nav-item">
+                @php
+                    $cmsLanguages = getCMSLanguage();
+                @endphp
+
+                @if(count($cmsLanguages) > 1)
+                    <div class="select-wrapper select-language-wrapper">
+                        <select class="form-control" name="cmsLanguage">
+                            @foreach($cmsLanguages as  $key => $item)
+                                <option value="{!! $key !!}" @if(getLanguageSession() == $key) selected @endif>{!! $item !!}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
+            </li>
+            {{--<li class="nav-item">
                 <a href="#" class="nav-link">Schedule
                     <span class="badge badge-primary ml-1">New</span>
                 </a>
@@ -22,8 +37,8 @@
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="mdi mdi-bookmark-plus-outline"></i>Score</a>
-            </li>
-        </ul>--}}
+            </li>--}}
+        </ul>
 
         <ul class="navbar-nav navbar-nav-right">
           {{--  <li class="nav-item dropdown">

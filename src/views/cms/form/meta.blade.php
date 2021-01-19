@@ -1,3 +1,7 @@
+@php
+    $language = getLanguageSession();
+@endphp
+
 <div class="form-group">
     <label class="label-required">
         {{ $model->label('metaTitle', 'META') }}

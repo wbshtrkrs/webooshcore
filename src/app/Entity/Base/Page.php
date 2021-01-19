@@ -22,15 +22,10 @@ class Page extends CMS {
     ];
 
     public function getValue($key, $listItem, $language){
-        if (count(Config::get('cms.LANGUAGE')) == 1 && isset($this->json->$key)) {
-            return @$this->json->$key;
-        } else if (count(Config::get('cms.LANGUAGE')) == 1 && isset($listItem->$key)) {
-            return @$listItem->$key;
-        } else if (isset($this->$key)) {
+        if (isset($this->$key)) {
             return @$this->$key;
-        } else {
-            return parent::getValue($key, $listItem, $language);
         }
-    }
 
+        return parent::getValue($key, $listItem, $language);
+    }
 }

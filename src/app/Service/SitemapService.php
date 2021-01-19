@@ -15,7 +15,7 @@ class SitemapService
             }
 
             try {
-                SitemapGenerator::create(env('APP_URL', 'https://www.weboosh.id/'))
+                SitemapGenerator::create(env('APP_URL', 'https://www.vodea.id/'))
                     ->writeToFile($path);
             } catch (\Exception $e) {
                 \Log::info($e->getMessage());

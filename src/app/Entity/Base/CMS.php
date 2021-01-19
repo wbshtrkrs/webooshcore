@@ -21,16 +21,17 @@ class CMS extends BaseEntity {
     const IS_CMS = true;
 
     public function getUrlIndex($extraParams = []){
-        return route('admin.pages');
+        return route('admin.page.list');
     }
 
     public function getUrlDetails($extraParams = []){
-        return route('admin.page-details.save', ['subtype' => $this::getClassName()]);
+        return route('admin.page.details', ['subtype' => $this::getClassName()]);
     }
 
     public function contents(){
-        return $this->hasMany(CMSContent::class, CodingConstant::ConvertCase('cms_id'));
+        return $this->hasMany(CMSContent::class, 'cmsId');
     }
+
     public function getContent($language){
         $object = $this->getObject($language);
         if (empty($object)) return '';
@@ -38,24 +39,21 @@ class CMS extends BaseEntity {
     }
 
     public function getObject($language){
-        if (count(Config::get('cms.LANGUAGE')) == 1){
-            return $this;
-        }
-        if (empty($language)) $language = Config::get('cms.LANGUAGE')[0];
         if (empty($this->id)) return [];
 
-        $content = $this->contents()->where('language', $language)->first();
+        $content = $this->contents()->where('lang', $language)->first();
         if (empty($content)) {
-            $content = new CMSContent(['language'=>$language, CodingConstant::ConvertCase('cms_id')=>$this->id]);
+            $content = new CMSContent(['lang'=>$language, 'cmsId' => $this->id]);
             $content->save();
         }
+
         return $content;
     }
 
     public function saveContent($language, $json){
-        $content = $this->contents()->where('language', $language)->first();
+        $content = $this->contents()->where('lang', $language)->first();
         if (empty($content)) {
-            $content = new CMSContent(['language'=>$language, CodingConstant::ConvertCase('cms_id')=>$this->id]);
+            $content = new CMSContent(['lang'=>$language, 'cmsId' => $this->id]);
         }
         $content->json = $json;
         $content->save();
@@ -80,24 +78,29 @@ class CMS extends BaseEntity {
     }
 
     public function getValue($key, $listItem, $language){
-        if (!empty($language)) {
-            $json = $this->getContent($language);
+        $json = $this->getContent($language);
 
-            if (empty($listItem)) return @$json->$key;
-            else return @$listItem->$key;
-        }
-        else {
-            $json = $this->getContent($language);
+        if (empty($listItem)) return @$json->$key;
+        else return @$listItem->$key;
+    }
 
-            if (empty($listItem)) {
-                if (!isset($json->key) && substr(static::formType($key),0,5) == 'Image') {
-                    return [];
-                }else {
-                    return @$json->$key;
+    public function getFrontendValue($key) {
+        $parentContent = CMSContent::where('cmsId', $this->id)->where('lang', getParentLanguage())->get()->first();
+
+        $initClass = nameToEntity($this->subtype);
+        $formLangDisabled = $initClass::FORM_LANGUAGE_DISABLED;
+
+        if (!in_array($key, $formLangDisabled)) {
+            $selectedContent = CMSContent::where('cmsId', $this->id)->where('lang', getSelectedFrontendLang())->get()->first();
+
+            if (isset($selectedContent->json->$key)) {
+                if (!empty($selectedContent->json->$key)) {
+                    return $selectedContent->json->$key;
                 }
             }
-            else return @$listItem->$key;
         }
+
+        return $parentContent->json->$key;
     }
 
 }

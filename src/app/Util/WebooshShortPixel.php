@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Weboosh\Weboosh\app\Util;
+namespace Vodea\VodeaCore\app\Util;
 
 use ShortPixel;
 
@@ -21,7 +21,6 @@ class WebooshShortPixel
         }
 
         $path = str_replace('\\', '/', $path);
-        $url = str_replace('\\', '/', $url);
 
         $this->file = ShortPixel\fromUrls($url);
 

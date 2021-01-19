@@ -344,6 +344,11 @@ body {
   }
 }
 
+.select-language-wrapper {
+  min-width: 125px;
+  width: 100%;
+}
+
 .select2-container {
   .select2-dropdown {
 
@@ -404,22 +409,68 @@ body {
             }
           }
 
-          tbody td.day {
-            font-size: 12px;
+          tbody td {
 
-            &:first-child, &:last-child {
-              text-align: center;
+            &.day {
+              font-size: 12px;
+
+              &:first-child, &:last-child {
+                text-align: center;
+              }
+
+              &.active:before, &.today:before {
+                width: 30px;
+                height: 30px;
+              }
+
+              &.today:before {
+                background: $main-color;
+              }
             }
 
-            &.active:before, &.today:before {
-              width: 30px;
-              height: 30px;
+            &.range-start {
+              position: relative;
+              color: white;
+              background: transparent;
+
+              &:before {
+                content: "";
+                width: 30px;
+                height: 30px;
+                background: #2196f3;
+                border-radius: 100%;
+                display: block;
+                margin: auto;
+                vertical-align: middle;
+                position: absolute;
+                top: 1px;
+                z-index: -1;
+                left: 0;
+                right: 0;
+              }
             }
 
-            &.today:before {
-              background: $main-color;
-            }
+            &.range-end {
+              position: relative;
+              color: white;
+              background: transparent;
 
+              &:before {
+                content: "";
+                width: 30px;
+                height: 30px;
+                background: #19d895;
+                border-radius: 100%;
+                display: block;
+                margin: auto;
+                vertical-align: middle;
+                position: absolute;
+                top: 1px;
+                z-index: -1;
+                left: 0;
+                right: 0;
+              }
+            }
           }
         }
       }

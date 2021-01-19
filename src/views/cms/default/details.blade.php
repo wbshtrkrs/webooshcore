@@ -11,7 +11,8 @@
 
         $buttonSection = true;
 
-        $language = '';
+        $parentLanguage = getParentLanguage();
+        $language = getLanguageSession();
     @endphp
 @endsection
 

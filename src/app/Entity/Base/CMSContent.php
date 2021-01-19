@@ -5,12 +5,12 @@ namespace App\Entity\Base;
 class CMSContent extends BaseEntity {
 
     protected $table = 'cms_content';
-    protected $fillable = ['language', 'json', 'cms_id'];
+    protected $fillable = ['lang', 'json', 'cms_id'];
 
-    public function setJsonAttribute($value){
+    public function setJsonAttribute($value) {
         $this->attributes['json'] = json_encode($value);
     }
-    public function getJsonAttribute($value){
+    public function getJsonAttribute($value) {
         return json_decode($value);
     }
 

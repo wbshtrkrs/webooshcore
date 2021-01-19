@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="{{ asset('/assets/weboosh/webooshcore/vendors/ladda/css/ladda-themeless.min.css') }}">
 
 <link rel="stylesheet" href="{{ asset('/assets/weboosh/webooshcore/vendors/chartjs/Chart.min.css') }}">
+
+<link rel="stylesheet" href="{{ asset('/assets/weboosh/webooshcore/vendors/flag-icon/css/flag-icon.min.css') }}">
 <!-- End plugin css for this page -->
 <!-- inject:css -->
 <link rel="stylesheet" href="{{ asset('/assets/weboosh/webooshcore/css/master.css') }}">
@@ -17,7 +19,7 @@
 <!-- Layout styles -->
 <link rel="stylesheet" href="{{ asset('/assets/weboosh/webooshcore/css/custom-bootstrap-margin-padding.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/weboosh/webooshcore/css/style.css') }}">
-<link rel="stylesheet" href="{{ asset('/assets/weboosh/webooshcore/css/webooshcore.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/weboosh/webooshcore/css/vodeacore.css') }}">
 <!-- End Layout styles -->
 
 <!-- custom style -->

@@ -111,7 +111,15 @@ function isActiveRoute($arrayRouteName){
 function getSettingByKey($key){
     $model = Setting::first();
 
-    return @$model->$key;
+    if ($model) {
+        if ($model::USE_MULTI_LANG) {
+            return @$model->getFrontendValue($key);
+        }
+
+        return @$model->$key;
+    }
+
+    return false;
 }
 
 function getPermalink($name, $id) {
@@ -157,4 +165,27 @@ function checkAccessSidebarCore($access, $roles) {
     return false;
 }
 
+function getParentLanguage() {
+    $parent = config('cms.PARENT_LANGUAGE', 'en');
+
+    return $parent;
+}
+
+function getCMSLanguage() {
+    $languages = config('cms.LANGUAGES', []);
+
+    return $languages;
+}
+
+function getLanguageSession() {
+    $languageSession = session('cmsLanguage', config('cms.PARENT_LANGUAGE', 'en'));
+
+    return $languageSession;
+}
+
+function getSelectedFrontendLang() {
+    $selectedLang = session('selectedLang');
+
+    return $selectedLang;
+}
 ?>

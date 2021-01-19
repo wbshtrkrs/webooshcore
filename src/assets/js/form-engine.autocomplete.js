@@ -30,12 +30,16 @@ function initAutoComplete(){
 
 		var options = {
 			ajax: {
-				url: url,
+				url: function () {
+					url = self.attr('data-url');
+					return url;
+				},
 				dataType: 'json',
 				data: function (params) {
 					var query = {
 						keyword: params.term,
 						limit: limit,
+						page: params.page || 1,
 						exception: function () {
 							if (exceptionName) {
 								exceptionIds = $(`[name=${exceptionName}]`).val()
@@ -52,16 +56,23 @@ function initAutoComplete(){
 					return query;
 				},
 				processResults: function (data) {
+					params.page = params.page || 1;
+					serverLimit = data.limit || limit;
+
 					var processedData = [];
-					$.each(data, function(index, item){
+					$.each(data.results, function(index, item) {
 						processedData.push({
 							id: item[key],
 							text: item[getValue],
 							data: item
 						});
-					})
+					});
+
 					return {
-						results: processedData
+						results: processedData,
+						pagination: {
+							more: (params.page * serverLimit) < data.totalCount
+						}
 					};
 				}
 			}

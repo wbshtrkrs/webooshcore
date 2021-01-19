@@ -3,10 +3,11 @@
 namespace weboosh\webooshcore;
 
 use App\Blade\CustomBlade;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
-
-class WebooshCoreProvider extends ServiceProvider {
+class WebooshCoreProvider  extends ServiceProvider {
     public function boot() {
         self::IncludeMultipleFile([
             '/app/Blade/',
@@ -40,4 +41,5 @@ class WebooshCoreProvider extends ServiceProvider {
     public function register() {
         // TODO: Implement register() method.
     }
+
 }

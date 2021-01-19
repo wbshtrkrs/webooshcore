@@ -32,16 +32,18 @@ class BaseEntity extends Authenticatable {
     const FORM_IMAGE_LIMIT = [];
     const FORM_SELECT_LIST = [];
     const FORM_DISABLED = [];
+    const FORM_LANGUAGE_DISABLED = [];
     const FORM_READONLY = [];
     const FORM_REQUIRED = ['ALL'];
     const FORM_LIST = [];
     const INDEX_FIELD = [];
     const MANUAL_SAVE_FIELD = [];
     const IS_CMS = false;
-    const LANGUAGE = ['en', 'zh_SG'];
+    const LANGUAGE = ['en'];
     const LANGUAGE_MULTI = ['ALL'];
     const AMOUNT_CURRENCY = 'Rp';
 
+    const USE_MULTI_LANG = false;
     const USE_META_SET = false;
     const ALLOW_CREATE = true;
     const ALLOW_DELETE = true;
@@ -105,7 +107,6 @@ class BaseEntity extends Authenticatable {
     public function setAttribute($key, $value){
         return parent::setAttribute($key, $value);
     }
-
 
     //FORM ENGINE start
     public static function label($key, $useFor = 'FORM'){
@@ -183,21 +184,6 @@ class BaseEntity extends Authenticatable {
             if (static::formType($key) == 'SelectMultiple'){
                 return @$this->$key->pluck('id')->toArray();
             }
-            if (static::formType($key) == 'ListSortable'){
-                $list = @$this->$key;
-
-                if (isset($list)) {
-                    foreach ($list as $idx => $items) {
-                        foreach ($items as $i => $value) {
-                            if (substr(@$value,0,1) == '[' && substr(@$value,-1) == ']') {
-                                $items->$i = json_decode(@$value);
-                            }
-                        }
-                    }
-                }
-
-                return @$list;
-            }
             return @$this->$key;
         }
         else return @$listItem->$key;
@@ -218,7 +204,7 @@ class BaseEntity extends Authenticatable {
     }
     public function getUrlIndex($extraParams = []){
         if (!empty(static::ROUTE_INDEX)) return route(static::ROUTE_INDEX, $extraParams);
-        if (\Route::has('admin.'.strtolower(self::getClassName()).'s')) return route('admin.'.strtolower(self::getClassName()).'s');
+        if (\Route::has('admin.'.strtolower(self::getClassName()).'list')) return route('admin.'.strtolower(self::getClassName()).'list');
         return static::URL_INDEX;
     }
     public function getUrlDetails($extraParams = []){
@@ -226,7 +212,7 @@ class BaseEntity extends Authenticatable {
 
         $extraParams['id'] = isset($extraParams['id']) ? $extraParams['id'] : $id;
         if (!empty(static::ROUTE_DETAILS)) return route(static::ROUTE_DETAILS, $extraParams);
-        if (\Route::has('admin.'.strtolower(self::getClassName()))) return route('admin.'.strtolower(self::getClassName()), $extraParams);
+        if (\Route::has('admin.'.strtolower(self::getClassName()).'.details')) return route('admin.'.strtolower(self::getClassName()).'.details', $extraParams);
         return static::URL_DETAILS;
     }
     public static function getClassName(){
@@ -236,12 +222,6 @@ class BaseEntity extends Authenticatable {
     }
     public function getFormName($key, $listName, $listIndex, $language, $suffix = ''){
         $formName = '';
-        $languageMulti = Config::get('cms.LANGUAGE_MULTI');
-        $languageList = Config::get('cms.LANGUAGE');
-
-        if (!empty($language) && count($languageList) > 0  && count($languageMulti) == 1 && $languageMulti[0] == 'ALL') {
-            $formName .= $language;
-        }
 
         if (!empty($listName) && isset($listIndex)) {
             if (empty($formName)) $formName .= $listName;

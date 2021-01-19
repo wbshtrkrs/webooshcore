@@ -160,6 +160,7 @@
     var fullImgURL = mainUrl + '/assets/upload/full/';
     var mdImgURL = mainUrl + '/assets/upload/md/';
     var fileUrl = mainUrl + '/assets/upload/file/';
+    var saveSessionUrl = '{!! (Route::has('admin.save.session')) ? route('admin.save.session') : '' !!}';
 </script>
 
 @include('cms::layouts.part.js')

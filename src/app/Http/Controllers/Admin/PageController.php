@@ -60,12 +60,11 @@ class PageController extends Controller {
             $model->save();
         }
 
-        $model = $class::SaveWithDataCMS($model);
-
+        $class::SaveWithDataCMS($model);
 
         $notification = NotificationService::DefaultNotification('success');
 
 
-        return redirect()->route('admin.pages')->with('notification', $notification);
+        return redirect()->route('admin.page.list')->with('notification', $notification);
     }
 }

@@ -7,7 +7,7 @@
 
         // Submenu Dropdown
         $('.submenu-dropdown').click(function () {
-            $(this).attr('aria-expanded', function (i, attr) {
+            $(this).attr('aria-expanded', functvoion (i, attr) {
                 return attr == 'true' ? 'false' : 'true';
             });
             $(this).next().toggleClass('show');
@@ -33,6 +33,25 @@
         // End Submit Button
 
 
+        // Multi Lang Select
+        function langState(state) {
+            if (!state.id) { return state.text; }
+
+            var $temp = $(
+                '<span class="mr-5 flag-icon flag-icon-' + state.element.value + ' flag-icon-squared"></span><span class="flag-text">'+ state.text +'</span>'
+            );
+
+            return $temp;
+        }
+
+        $('[name="cmsLanguage"]').select2({
+            placeholder: 'Select language options',
+            templateResult: langState,
+            templateSelection: langState
+        });
+        // End Multi Lang Select
+
+
         // Form Validate
         $("#form").validate({
             success: 'valid',
@@ -53,36 +72,6 @@
             }
         });
         // End Form Validate
-
-
-        // Data Table
-        /*$('.datatable').DataTable({
-            "order": [],
-            stateLoadParams: function(settings, data ) {
-                if (data.order) delete data.order;
-            },
-            "aLengthMenu": [
-                [5, 10, 15, -1],
-                [5, 10, 15, "All"]
-            ],
-            "iDisplayLength": 10,
-            "language": {
-                search: ""
-            },
-            stateSave: true
-        });
-
-        $('.datatable').each(function () {
-            var datatable = $(this);
-            // SEARCH - Add the placeholder for Search and Turn this into in-line form control
-            var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
-            search_input.attr('placeholder', 'Search');
-            search_input.removeClass('form-control-sm');
-            // LENGTH - Inline-Form control
-            var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
-            length_sel.removeClass('form-control-sm');
-        });*/
-        // End Data Table
 
 
         if ($('.btn-add-row').length > 0) {
@@ -250,6 +239,19 @@ function initAllElement() {
     }
     // End Select 2
 
+    $('[name="cmsLanguage"]').change(function () {
+        var ajaxData = {
+            cmsLanguage: $(this).val()
+        };
+
+        $.ajax({
+            method: 'POST',
+            url: saveSessionUrl,
+            data: ajaxData
+        }).done(function( response ) {
+            window.location.reload();
+        });
+    });
 
     // Timepicker
     if ($(".timepicker").length) {
@@ -276,6 +278,16 @@ function initAllElement() {
     // Datepicker
     if ($('.datepicker').length) {
         $('.datepicker').datepicker({
+            todayBtn: "linked",
+            enableOnReadonly: true,
+            todayHighlight: true,
+            toggleActive: true,
+            format: "yyyy-mm-dd",
+        });
+    }
+
+    if ($('.input-daterange').length) {
+        $('.input-daterange').datepicker({
             todayBtn: "linked",
             enableOnReadonly: true,
             todayHighlight: true,
