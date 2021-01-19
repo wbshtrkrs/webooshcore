@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Vodea\VodeaCore\app\Util;
+namespace weboosh\webooshcore\app\Util;
 
 use ShortPixel;
 

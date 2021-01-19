@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\WebooshCore;
 
-use App\Util\VodeaCore\ResponseUtil;
+use App\Util\WebooshCore\ResponseUtil;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;

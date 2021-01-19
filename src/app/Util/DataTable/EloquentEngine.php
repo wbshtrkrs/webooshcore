@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Util\VodeaCore\DataTable;
+namespace App\Util\WebooshCore\DataTable;
 
-use App\Service\VodeaCore\ExportService;
+use App\Service\WebooshCore\ExportService;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;

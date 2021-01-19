@@ -70,7 +70,7 @@ class FileService{
             chmod($full_path, 0777);
 
             if (!empty(env('SHORT_PIXEL_API_KEY', null))) {
-                $shortPixel = new VodeaShortPixel();
+                $shortPixel = new WebooshShortPixel();
                 $shortPixel->fromFiles($full_path, $path);
             }
         } catch (\Exception $e){

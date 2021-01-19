@@ -19,7 +19,7 @@
 <!-- Layout styles -->
 <link rel="stylesheet" href="{{ asset('/assets/weboosh/webooshcore/css/custom-bootstrap-margin-padding.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/weboosh/webooshcore/css/style.css') }}">
-<link rel="stylesheet" href="{{ asset('/assets/weboosh/webooshcore/css/vodeacore.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/weboosh/webooshcore/css/webooshcore.css') }}">
 <!-- End Layout styles -->
 
 <!-- custom style -->
